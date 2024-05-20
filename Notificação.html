@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Notify.js</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+</head>
+<body>
+
+<button id="notifyBtn">Sucesso</button>
+<button id="notifyErroBtn">Erro</button>
+<button id="notifyInfoBtn">Informações</button>
+
+<script>
+$(document).ready(function() {
+  $('#notifyBtn').click(function() {
+    $.notify("Acesso concedido", "success");
+  });
+
+  $('#notifyErroBtn').click(function() {
+    $.notify("Ocorreu um erro!", "error");
+  });
+
+  $('#notifyInfoBtn').click(function() {
+    $.notify("Informação", "info");
+  });
+
+  // Adicionando evento de clique para o botão de atualizar
+  $('#atualizarBtn').click(function() {
+    // Verifica se os campos estão vazios
+    var nomeInput = $('#nomeInput').val();
+    var usuarioInput = $('#usuarioInput').val();
+    var avatarInput = $('#avatarInput').prop('files').length > 0;
+
+    // Se algum campo estiver vazio, exibe a notificação de erro
+    if (!nomeInput || !usuarioInput || !avatarInput) {
+      $.notify("Erro! Preencha todos os campos!", "error");
+    }
+  });
+});
+</script>
+
+</body>
+</html>

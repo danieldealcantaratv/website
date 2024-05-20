@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="src/css/Userperfil.css">
+  <link rel="stylesheet" href="src/css/background-animated.css">
+  <style>
+    /* Estilo inicial para ocultar o user-alterate */
+    #userAlterate {
+      display: none;
+    }
+  </style>
+  <!-- Adicionando jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Adicionando notify.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+</head>
+<body>
+<div class="area">
+  <ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+  
+<div class="context">
+  <button class="editar-btn" onclick="toggleUserAlterate()"><i class="fas fa-edit"></i></button>
+  <div id="user">
+    <img src="src/images/avatar.jpg" id="user_avatar" alt="Avatar" class="avatar-preview">
+    <p id="user_infos">
+      <span class="item-description" id="nomeSpan">
+        Seu Nome
+      </span>
+      <span class="item-description" id="usuarioSpan">
+        @seu.usuario
+      </span>
+    </p>
+  </div>
+  <!--Atualizar dados-->
+  <div class="user-alterate" id="userAlterate">
+    <h2>Alterar dados</h2>
+    <form id="meuFormulario">
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" id="nomeInput" required placeholder="Seu nome">
+        <label for="user">Usuário</label>
+        <input type="text" id="usuarioInput" required placeholder="@usuário" oninput="fixarArroba()">
+        <label for="avatar">Avatar</label>
+        <img src="src/images/avatar.jpg" id="avatar_preview" alt="Avatar Preview" style="cursor: pointer;">
+        <input type="file" accept="image/*" id="avatarInput" style="display:none;">
+        <p class="aviso">Clique na imagem acima para substituir</p>
+      </div>
+    
+      <button type="submit" class="submit-dados" onclick="atualizarDados()" id="atualizarBtn" disabled>Atualizar dados</button>
+    </form>
+  </div>
+</div>
+    
+<script>// Função para alternar a exibição do user-alterate
+function toggleUserAlterate() {
+  var userAlterate = document.getElementById("userAlterate");
+  userAlterate.style.display = (userAlterate.style.display === "none" || userAlterate.style.display === "") ? "flex" : "none";
+}
+
+// Função para atualizar o avatar com a imagem do avatar_preview
+function atualizarAvatar() {
+  document.getElementById('user_avatar').src = document.getElementById('avatar_preview').src;
+}
+
+// Função para atualizar os dados do usuário
+function atualizarDados() {
+  var nomeInput = document.getElementById("nomeInput").value;
+  var usuarioInput = document.getElementById("usuarioInput").value;
+
+  // Armazena os valores no localStorage
+  localStorage.setItem("nome", nomeInput);
+  localStorage.setItem("usuario", usuarioInput);
+
+  // Atualiza os spans com os novos valores
+  document.getElementById("nomeSpan").innerText = nomeInput;
+  document.getElementById("usuarioSpan").innerText = usuarioInput;
+
+  // Limpa os campos de input após a atualização
+  document.getElementById("nomeInput").value = "";
+  document.getElementById("usuarioInput").value = "";
+
+  // Desabilita o botão de atualizar após a atualização
+  document.getElementById("atualizarBtn").disabled = true;
+
+  // Esconde o user-alterate após a atualização
+  document.getElementById("userAlterate").style.display = "none";
+
+  // Notifica o usuário sobre a atualização bem-sucedida
+  $.notify("Atualizado com sucesso", "success");
+
+  // Chama a função para atualizar o avatar
+  atualizarAvatar();
+}
+
+// Função para carregar a imagem do avatar quando selecionada pelo usuário
+function carregarImagem(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      document.getElementById('avatar_preview').src = e.target.result;
+      verificarPreenchimentoEImagem();
+
+      // Armazena o URL da imagem no localStorage
+      localStorage.setItem("avatarURL", e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+// Função para carregar os valores armazenados no localStorage e preencher as inputs
+function carregarValores() {
+  var nomeInput = localStorage.getItem("nome");
+  var usuarioInput = localStorage.getItem("usuario");
+  var avatarURL = localStorage.getItem("avatarURL");
+
+  // Define os valores das inputs como uma string vazia se não houver valores armazenados
+  document.getElementById("nomeInput").value = nomeInput ? nomeInput : "";
+  document.getElementById("usuarioInput").value = usuarioInput ? usuarioInput : "";
+
+  // Atualiza os spans com os valores carregados
+  document.getElementById("nomeSpan").innerText = nomeInput ? nomeInput : "Seu Nome";
+  document.getElementById("usuarioSpan").innerText = usuarioInput ? usuarioInput : "@seu.usuario";
+
+  // Define o atributo src da imagem avatar_preview com o URL da imagem armazenado no localStorage
+  if (avatarURL) {
+    document.getElementById('avatar_preview').src = avatarURL;
+    document.getElementById('user_avatar').src = avatarURL;
+  }
+}
+
+// Chama a função para carregar os valores ao carregar a página
+window.onload = carregarValores;
+
+// Função para verificar se as inputs estão preenchidas e habilitar o botão de atualizar
+function verificarPreenchimento() {
+  var nomeInput = document.getElementById("nomeInput").value;
+  var usuarioInput = document.getElementById("usuarioInput").value;
+
+  // Habilita o botão se as inputs não estiverem vazias
+  document.getElementById("atualizarBtn").disabled = nomeInput === "" || usuarioInput === "";
+}
+
+// Chama a função verificarPreenchimento() quando o usuário digita nas inputs
+document.getElementById("nomeInput").addEventListener("input", verificarPreenchimento);
+document.getElementById("usuarioInput").addEventListener("input", verificarPreenchimento);
+
+// Função para adicionar o "@" ao usuário, se não estiver presente
+function fixarArroba() {
+  var input = document.getElementById("usuarioInput");
+  var value = input.value.trim(); // Remover espaços em branco antes e depois do valor
+
+  // Verificar se o valor não está vazio e não começa com "@"
+  if (value !== "" && !value.startsWith("@")) {
+    input.value = "@" + value;
+  }
+}
+
+// Função para abrir o seletor de arquivo quando o usuário clicar na imagem avatar_preview
+document.getElementById("avatar_preview").addEventListener("click", function() {
+  document.getElementById("avatarInput").click();
+});
+
+// Função para habilitar o botão "Atualizar dados" se o nome, usuário e uma imagem forem selecionados
+function verificarPreenchimentoEImagem() {
+  var nomeInput = document.getElementById("nomeInput").value;
+  var usuarioInput = document.getElementById("usuarioInput").value;
+  var avatarInput = document.getElementById("avatarInput").files.length;
+
+  // Habilita o botão se os campos estiverem preenchidos e uma imagem for selecionada
+  document.getElementById("atualizarBtn").disabled = !(nomeInput && usuarioInput && avatarInput);
+}
+
+// Adiciona um event listener para o evento "change" do input de arquivo (avatarInput)
+document.getElementById("avatarInput").addEventListener("change", function() {
+  carregarImagem(this);
+});
+
+// Função para validar se o usuário contém o caractere "@"
+function validarUsuario() {
+  var usuarioInput = document.getElementById("usuarioInput").value;
+
+  // Verifica se o usuário contém o "@" no início do valor
+  if (!usuarioInput.startsWith('@')) {
+    alert("O usuário deve conter o caractere '@'.");
+    return false;
+  }
+
+  return true;
+}
+
+// Adiciona um event listener para o evento "submit" do formulário
+document.getElementById("meuFormulario").addEventListener("submit", function(event) {
+  // Chama a função de validação ao enviar o formulário
+  if (!validarUsuario()) {
+    event.preventDefault(); // Impede o envio do formulário se a validação falhar
+  }
+});
+
+</script>
+
+</body>
+</html>
