@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    max-height: 100vh;
+    background-color: #e3e9f7;
+}
+
+#user {
+    display: center;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#user_avatar {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 50px;
+}
+
+#user_infos #nomeSpan {
+  color: white;
+}
+
+#user_infos {
+    display: flex;
+    flex-direction: column;
+}
+
+#user_infos span:last-child {
+    color: #A5A5A5;
+    font-size: 15px;
+}
+
+.user-alterate {
+    display: none;
+    flex-direction: column;
+    gap: 20px; /* Espaçamento entre as seções */
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 16px; /* Border-radius de 20px */
+    width: 95%; /* Defina a largura desejada */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    border: none;
+}
+
+.form-group {
+    border: 2px solid #E3E9F7; /* Adiciona uma borda */
+    border-radius: 8px; /* Arredonda as bordas */
+    padding: 25px; /* Adiciona espaço interno */
+    background-color: #FFDDD6;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    margin-top: 5px;
+}
+
+.form-group input {
+    width: calc(100% - 12px); /* Ajusta a largura considerando a margem do input */
+    padding: 8px;
+    border: none; /* Remove a borda para evitar duplicidade */
+    outline: none;
+}
+
+.form-group p {
+  width: 100%;
+  text-align: center;
+  white-space: nowrap
+}
+
+.user-alterate h2 {
+    text-align: center; /* Alinha o título no centro */
+    color: #fff;
+}
+
+.user-alterate label {
+    text-align: left; /* Alinha o texto dos inputs à esquerda */
+    font-weight: bold;
+}
+
+.user-alterate input {
+    width: 100%; /* Define a largura dos inputs */
+    margin-bottom: 10px; /* Adiciona espaçamento abaixo dos inputs */
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #ED4E2E;
+    background-color: transparent;
+}
+
+.editar-btn {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    transition: all 0.3s;
+}
+
+.editar-btn i:hover {
+    color: #FFC2B6;
+    transition: all 0.3s;
+}
+
+.submit-dados {
+    position: relative;
+    left: 50%; /* Define a posição horizontal como o centro */
+    transform: translateX(-50%); /* Move o botão de volta metade da sua própria largura */
+    text-align: center;
+    background-color: #f0f0f9;
+    transition: background-color 2s;
+    border: 2px solid #E3E9F7; /* Adicionei uma borda ao botão */
+    border-radius: 20px; /* Border-radius de 20px */
+    padding: 10px 120px; /* Adicionei um espaçamento interno menor */
+    cursor: pointer; /* Alterei o cursor para indicar que é clicável */
+    bottom: 20px; /* Ajuste a posição do botão conforme necessário */
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.submit-dados:hover {
+    background-color: #ED4E2E;
+    /* Altera a cor de fundo ao passar o mouse */
+    transition: all 2s;
+    color: black;
+}
+
+/* Estilo para o input de arquivo */
+.form-group input[type="file"] {
+    display: none;
+}
+
+/* Estilo para o botão de upload */
+#avatarInput {
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+    border: none;
+}
+
+#avatar_preview {
+    width: 80px; /* Defina a largura desejada */
+    height: 80px; /* Defina a altura desejada */
+    object-fit: cover; /* Mantém a proporção e corta a imagem para ajustar */
+    border-radius: 3%; /* Transforma a imagem em um círculo */
+    margin-top: 2px; /* Adiciona espaço acima da imagem */
+}
+

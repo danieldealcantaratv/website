@@ -1,0 +1,88 @@
+/* Estilo da caixa de pesquisa */
+.caixa-search {
+   margin-top: 20px;
+   background-color: #ED4E2E;
+   background-size: 200% 200%;
+   color: #fff; /* Muda a cor do ícone */
+   border-radius: 25px;
+   overflow: hidden;
+   margin-bottom: 20px;
+   display: flex; /* Para alinhar os itens no centro */
+   align-items: center;
+}
+
+.caixa-texto {
+   border: none;
+   background: transparent;
+   outline: none;
+   padding: 6px;
+   color: #fff;
+   font-size: 14px;
+   width: calc(100% - 45px);
+   float: left;
+   margin-left: 15px;
+   font-weight: bold;
+}
+
+.caixa-texto::placeholder {
+   color: #fff; /* Cor desejada para o placeholder */
+}
+
+.botao-search {
+   color: #fff;
+   width: 30px;
+   height: 30px;
+   margin: 2px; /* Ajuste de margem */
+   background: inherit;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   text-decoration: none;
+   align-items: center;
+   border: 1px solid #FFFFFF;
+   transition: all 0.4s; /* Transição adicionada */
+   cursor: pointer; /* Adicionado cursor pointer */
+}
+
+/* Efeitos de animação */
+.botao-search:hover {
+   transform: scale(1.1); /* Aumenta o tamanho do botão */
+   transition: all 0.4s;
+   background-color: #BE4932;
+}
+
+/* Estilo para esconder os Produtos que não correspondem à pesquisa */
+#Produtos {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr); /* Ajuste para duas colunas */
+   gap: 8px;
+   list-style: none;
+   padding: 5px;
+   margin: 0;
+   max-height: 560px; /* Altura máxima da lista */
+   overflow-y: auto; /* Adiciona rolagem vertical */
+   box-sizing: border-box; /* Inclui padding na largura */
+}
+
+#Produtos li {
+   background-color: #ED4E2E;
+   color: #fff;
+   padding: 40px 6px; /* Ajuste de padding */
+   border-radius: 8px;
+   text-align: center;
+   cursor: pointer;
+   transition: all .4s;
+   border: 1px solid #fff;
+}
+
+#Produtos li:hover {
+   background-color: #BE4932;
+   transition: all .4s;
+}
+
+/* Garante que o contêiner principal não cause overflow */
+body {
+   margin: 0;
+   font-family: Arial, sans-serif;
+   overflow-x: hidden; /* Evita overflow horizontal */
+}
