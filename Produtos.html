@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="src/css/Sidebar.css">
+    <link rel="stylesheet" href="src/css/Produtos.css">
+    <title>Produtos</title>
+</head>
+<body>
+    <nav id="sidebar">
+        <div id="sidebar_content">
+            <div id="InfoSite">
+                <img src="src/images/logo2.jpg" id="logo_site" alt="Avatar">
+                <p id="user_infos">
+                    <span class="item-description">
+                         Website Affiliate&#8482;
+                    </span>
+                    <span class="item-description">
+                        IG:danieldealcantaratv
+                    </span>
+                </p>
+            </div>
+            <ul id="side_items">
+                <li class="side-item">
+                    <a href="Home.html">
+                        <i class="fa-solid fa-home"></i>
+                        <span class="item-description">Home</span>
+                    </a>
+                </li>
+                <li class="side-item active">
+                    <a href="Produtos.html">
+                        <i class="fas fa-box"></i>
+                        <span class="item-description">Produtos</span>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a href="Shopee.html">
+                        <i class="fab fa-shopify"></i>
+                        <span class="item-description">Shopee</span>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a href="Amazon.html">
+                        <i class="fab fa-amazon"></i>
+                        <span class="item-description">Amazon</span>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a href="Aplicativos.html">
+                        <i class="fas fa-th"></i>
+                        <span class="item-description">Aplicativos</span>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a href="Config.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="item-description">Configurações</span>
+                    </a>
+                </li>
+            </ul>
+            <button id="open_btn">
+                <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+        <div id="perfil">
+            <span id="user_perfil">
+                <a href="user-perfil.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="item-description">Perfil</a>
+                </span>
+            </span>
+        </div>
+    </nav>
+    <main>
+        <h1>Produtos</h1>
+        <!-- Caixa de pesquisa -->
+        <section class="caixa-search">
+            <input id="searchInput" class="caixa-texto" type="text" placeholder="Pesquisar">
+            <button class="botao-search" onclick="filtrarProdutos()">
+                <i class="fas fa-search"></i>
+            </button>
+        </section>
+        <!-- Lista de Produtos em uma grade de 1 coluna -->
+        <ul id="Produtos">
+            <li><span class="tag" onclick="filtrarTag('Item')">Item</span></li>
+            <li><span class="tag" onclick="filtrarTag('Item)">Item 2</span></li>
+            <li><span class="tag" onclick="filtrarTag('Item')">Item 3</span></li>
+            <li><span class="tag" onclick="filtrarTag('Item')">Item 4</span></li>
+            <!-- Adicione mais Produtos e suas respectivas tags aqui -->
+        </ul>
+    </main>
+    <script src="src/javascript/script.js"></script>
+    <script>
+        function filtrarProdutos() {
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("Produtos");
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                a = li[i];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+        function filtrarTag(tag) {
+            var ul, li, a, i, txtValue;
+            ul = document.getElementById("Produtos");
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                a = li[i];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.indexOf(tag) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
